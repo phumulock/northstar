@@ -39,9 +39,9 @@ export class SortableExample extends LitElement {
       <div class="flex flex-col gap-2 p-4 border border-primary rounded">
           <div class="text-lg">${this.title}: <span class="font-bold">${this.value}</span></div>
           <div>Open your console to see event results</div>
-          <div id="sortable-container" class="flex flex-col gap-4">
+          <div id="sortable-container" class="flex flex-col">
             ${this.items?.length > 0 && this.items.map(
-              (item) => html` <div class="bg-primary text-primary-content p-4 rounded-box">${item.name}</div> `,
+              (item) => html` <div class="bg-primary text-primary-content m-1 p-4 rounded-box">${item.name}</div> `,
             )}
         </div>
       </div>

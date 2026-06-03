@@ -68,8 +68,8 @@ tasks:
       - |
         go tool air  \
          -build.cmd "go build -tags=dev -o tmp/bin/main ./cmd/web" \
-         -build.bin "tmp/bin/main" \
-         -build.exclude_dir "data,node_modules,web/resources/libs/datastar/node_modules,web/resources/libs/lit/node_modules" \
+         -build.entrypoint "tmp/bin/main" \
+         -build.exclude_dir "data,web" \
          -build.include_ext "go,templ" \
          -misc.clean_on_exit "true"
 

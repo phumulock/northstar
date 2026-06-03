@@ -181,7 +181,7 @@ templ TodoRow(mode TodoViewMode, todo *Todo, i int, isEditing bool) {
 		(mode == TodoViewModeActive && !todo.Completed) ||
 		(mode == TodoViewModeCompleted && todo.Completed) {
 		<li class="flex items-center gap-8 p-2 group" id={ fmt.Sprintf("todo%d", i) }>
-			<label
+			<span
 				id={ fmt.Sprintf("toggle%d", i) }
 				class="text-4xl cursor-pointer"
 				data-on:click={ datastar.PostSSE("/api/todos/%d/toggle", i) }
@@ -192,15 +192,15 @@ templ TodoRow(mode TodoViewMode, todo *Todo, i int, isEditing bool) {
 				} else {
 					@common.Icon("material-symbols:check-box-outline-blank")
 				}
-			</label>
-			<label
+			</span>
+			<span
 				id={ indicatorID }
 				class="flex-1 text-lg cursor-pointer select-none"
 				data-on:click={ datastar.GetSSE("/api/todos/%d/edit", i) }
 				data-indicator={ fetchingSignalName }
 			>
 				{ todo.Text }
-			</label>
+			</span>
 			@common.SseIndicator(fetchingSignalName)
 			<button
 				id={ fmt.Sprintf("delete%d", i) }

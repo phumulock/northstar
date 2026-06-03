@@ -30,10 +30,10 @@ func (h *Handlers) MonitorPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handlers) MonitorEvents(w http.ResponseWriter, r *http.Request) {
-	memT := time.NewTicker(time.Second)
+	memT := time.NewTicker(100 * time.Millisecond)
 	defer memT.Stop()
 
-	cpuT := time.NewTicker(time.Second)
+	cpuT := time.NewTicker(100 * time.Millisecond)
 	defer cpuT.Stop()
 
 	sse := datastar.NewSSE(w, r)

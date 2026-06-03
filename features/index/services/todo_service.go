@@ -21,7 +21,7 @@ type TodoService struct {
 	store sessions.Store
 }
 
-func NewTodoService(ns *embeddednats.Server, store sessions.Store) (*TodoService, error) {
+func NewTodoService(ctx context.Context, ns *embeddednats.Server, store sessions.Store) (*TodoService, error) {
 	nc, err := ns.Client()
 	if err != nil {
 		return nil, fmt.Errorf("error creating nats client: %w", err)
@@ -32,12 +32,12 @@ func NewTodoService(ns *embeddednats.Server, store sessions.Store) (*TodoService
 		return nil, fmt.Errorf("error creating jetstream client: %w", err)
 	}
 
-	kv, err := js.CreateOrUpdateKeyValue(context.Background(), jetstream.KeyValueConfig{
+	kv, err := js.CreateOrUpdateKeyValue(ctx, jetstream.KeyValueConfig{
 		Bucket:      "todos",
 		Description: "Datastar Todos",
 		Compression: true,
 		TTL:         time.Hour,
-		MaxBytes:    16 * 1024 * 1024,
+		MaxBytes:    16 << 20, // 16MiB
 	})
 
 	if err != nil {

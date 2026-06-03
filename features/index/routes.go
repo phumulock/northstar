@@ -1,6 +1,7 @@
 package index
 
 import (
+	"context"
 	"northstar/features/index/services"
 
 	"github.com/delaneyj/toolbelt/embeddednats"
@@ -8,8 +9,8 @@ import (
 	"github.com/gorilla/sessions"
 )
 
-func SetupRoutes(router chi.Router, store sessions.Store, ns *embeddednats.Server) error {
-	todoService, err := services.NewTodoService(ns, store)
+func SetupRoutes(ctx context.Context, router chi.Router, store sessions.Store, ns *embeddednats.Server) error {
+	todoService, err := services.NewTodoService(ctx, ns, store)
 	if err != nil {
 		return err
 	}

@@ -30,7 +30,7 @@ func SetupRoutes(ctx context.Context, router chi.Router, sessionStore *sessions.
 	router.Handle("/static/*", resources.Handler())
 
 	if err := errors.Join(
-		indexFeature.SetupRoutes(router, sessionStore, ns),
+		indexFeature.SetupRoutes(ctx, router, sessionStore, ns),
 		counterFeature.SetupRoutes(router, sessionStore),
 		monitorFeature.SetupRoutes(router),
 		sortableFeature.SetupRoutes(router),
